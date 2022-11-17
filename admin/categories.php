@@ -17,7 +17,7 @@
                         Welcome to admin
                         <small>Author</small>
                     </h1>
-
+                    <!-- Add category form -->
                     <div class="col-xs-6">
                         <form action="" method="post">
                             <div class="form-group">
@@ -29,22 +29,22 @@
                             </div>
                         </form>
 
-                        <?php
-                        if (isset($_POST["submit"])) {
-                            $cat_title = $_POST["cat_title"];
-                            if ($cat_title == "" || empty($cat_title)) {
-                                echo "This field should not be empty!";
-                            } else {
-                                $query = "INSERT INTO `categories` ( `cat_title`) VALUES ('$cat_title');";
-                                $insert_cat_query = mysqli_query($connection, $query);
-                                header('Location: categories.php');
-                                if (!$insert_cat_query) {
-                                    die("Query Failed" . mysqli_error($connection));
-                                }
-                            }
-                        }
+                        <!-- Edit category for -->
 
+
+                        <?php
+                        insert_categories();
                         ?>
+
+                        <?php //update and include query
+
+                        if (isset($_GET['edit'])) {
+                            $cat_id = $_GET['edit'];
+                            include('includes/update_categories.php');
+                        }
+                        
+                        ?>
+
                     </div>
 
                     <div class="col-xs-6">
@@ -55,53 +55,37 @@
                                     <th>ID</th>
                                     <th>Category Title</th>
                                     <th>Delete Category</th>
+                                    <th>Edit </th>
                                 </tr>
-                              
+
                             </thead>
                             <tbody>
                                 <?php // find all categories query
-                                 $query = "select * from categories";
-                                 $select_categories_query = mysqli_query($connection, $query);
-                                 while ($rows = mysqli_fetch_assoc($select_categories_query)) {
+                                $query = "select * from categories";
+                                $select_categories_query = mysqli_query($connection, $query);
+                                while ($rows = mysqli_fetch_assoc($select_categories_query)) {
                                     $cat_id =  $rows['cat_id'];
                                     $cat_title =  $rows['cat_title'];
                                 ?>
                                     <tr>
                                         <td><?= $cat_id; ?></td>
                                         <td><?= $cat_title; ?></td>
-                                        <td><a  href="categories.php?delete=<?= $cat_id; ?>">
-                                        <i class="fa fa-trash"></i></a></td>
+                                        <td><a href="categories.php?delete=<?= $cat_id; ?>">
+                                                <i class="fa fa-trash"></i></a></td>
+                                        <td><a href="categories.php?edit=<?= $cat_id ?>"><i class="fa fa-edit"></i></a></td>
                                         </a></td>
                                     </tr>
                                 <?php  } ?>
 
-                                <?php 
-                                
-                                if (isset($_GET['delete'])) {
-                                    
-                                    $category_id = $_GET['delete'];
-                                    $query = "delete from categories where cat_id = $category_id ";
-                                    $delete_cat_query = mysqli_query($connection,$query);
-                                    if (!$delete_cat_query) {
-                                        die("Query failed" );
-                                    } 
+                                <?php
+                                //Delete Query
+                                delete_category();
 
-                                }
-                                
                                 ?>
                             </tbody>
                         </table>
 
-
                     </div>
-
-
-
-
-
-
-
-
                 </div>
             </div>
             <!-- /.row -->
