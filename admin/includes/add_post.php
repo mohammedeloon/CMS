@@ -3,7 +3,7 @@
 if (isset($_POST['create_post'])) {
     $post_title = $_POST['title'];
     $post_author = $_POST['author'];
-    $post_category_id = $_POST['post_category_id'];
+    $post_category_id = $_POST['post_category'];
     $post_status = $_POST['post_status'];
 
 
@@ -21,10 +21,10 @@ if (isset($_POST['create_post'])) {
     move_uploaded_file($post_image_temp, "../images/$post_image");
 
 
-    $query = "INSERT INTO posts ( post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status) ";
+    $query = "INSERT INTO posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags, post_comment_count, post_status)  ";
 
-    $query .= "VALUES ($post_category_id, '$post_title', '$post_author', now(), '$post_image', '$post_content', '$post_tags', $post_comment_count, '$post_status');";
-
+    $query .= " values ($post_category_id , '$post_title', '$post_author' , now() , '$post_image' , '$post_content', '$post_tags' , '$post_comment_count' , '$post_status'  )";
+   
     $add_post_query = mysqli_query($connection, $query);
 
     confirmQuery($add_post_query);
@@ -48,9 +48,31 @@ if (isset($_POST['create_post'])) {
 
 
 <div class="form-group">
-<label for="post_category">Post Category Id</label>
-<input type="text" class="form-control" name="post_category_id">
+
+<label for="title">Category</label>
+<br>
+<select style="border-radius: 3px;" class="form-select form-select-sm" name="post_category" id="post_category">
+
+    <option selected>Select Category</option>
+    <?php
+
+    $query = 'select cat_title from categories;';
+    $selet_cat_query = mysqli_query($connection, $query);
+    confirmQuery($selet_cat_query);
+
+    while ($rows = mysqli_fetch_assoc($selet_cat_query)) {
+        $cat_title =  $rows['cat_title'];
+        $cat_id =  $rows['cat_id'];
+        echo "<option value=' $cat_id'> $cat_title </option>";
+    }
+    ?>
+
+</select>
+
+
+
 </div>
+
 
 
 

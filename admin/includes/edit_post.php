@@ -23,14 +23,7 @@ while ($rows = mysqli_fetch_assoc($select_posts_by_id_query)) {
 }
 
 
-if (empty($post_image)) {
-    $query = "select * from posts where post_id = $the_post_id; ";
-    $select_image_query = mysqli_query($connection, $query);
-    while ($row = mysqli_fetch_assoc($select_image_query)) {
-        $post_image = $row['post_image'];
-        echo $post_image;
-    }
-}
+
 
 if (isset($_POST['update_post'])) {
 
@@ -47,6 +40,19 @@ if (isset($_POST['update_post'])) {
     $post_content = $_POST['post_content'];
 
     move_uploaded_file($post_image_temp, "../images/$post_image");
+
+
+// this code keeps the old image if the user updated the post without selecting a new image 
+    if (empty($post_image)) {
+        $query = "select * from posts where post_id = $the_post_id; ";
+        $select_image_query = mysqli_query($connection, $query);
+        while ($row = mysqli_fetch_assoc($select_image_query)) {
+            $post_image = $row['post_image'];
+            
+        }
+
+      
+    }
 
     $query = "update posts set post_title = '$post_title' , post_category_id = '$post_category_id' , post_date = now(), post_author = '$post_author' , post_status = '$post_status' , post_tags = '$post_tags' , post_content = '$post_content' , post_image = '$post_image' where post_id = $the_post_id ;";
 
