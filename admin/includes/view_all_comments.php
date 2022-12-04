@@ -52,18 +52,39 @@
             //     echo "<td>{$post_title}</td>";
                
             // }
+
+
+
             
 
           
             echo "<td>{$comment_email}</td>";
           
             echo "<td>{$comment_status}</td>";
-            echo "<td>some title</td>";
+
+
+            $select_query = "select * from posts where post_id = $comment_post_id ";
+            $selct_post_query = mysqli_query($connection , $select_query);
+            confirmQuery($selct_post_query);
+
+            while ($rows = mysqli_fetch_assoc($selct_post_query)) {
+                $post_id = $rows['post_id'];
+                $post_title = $rows['post_title'];
+                echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a> </td>";
+               
+            }
+            
+
+            
+
+
+
+
             echo "<td>{ $comment_date}</td>";
-            echo "<td><a href='posts.php?delete= '><i class='fa fa-thumbs-up' aria-hidden='true'></i></a></td>";
-            echo "<td><a href='posts.php?delete= '><i class='fa fa-thumbs-down' aria-hidden='true'></i></a></td>";
-            echo "<td><a href='posts.php?delete='><i class='fa fa-trash'></i></a></td>";
-            echo "<td><a href='posts.php?edit=&source=edit_post'><i class='fa fa-edit'></i></a></td>";
+            echo "<td><a href='comments.php?approve=$comment_id '><i class='fa fa-thumbs-up' aria-hidden='true'></i></a></td>";
+            echo "<td><a href='comments.php?unapprove=$comment_id'><i class='fa fa-thumbs-down' aria-hidden='true'></i></a></td>";
+            echo "<td><a href='comments.php?delete_comment=$comment_id'><i class='fa fa-trash'></i></a></td>";
+            echo "<td><a href='posts.php?edit=&source=edit_comment'><i class='fa fa-edit'></i></a></td>";
             echo "<tr>";
         }
 
@@ -76,12 +97,30 @@
 
 <?php
 
-if (isset($_GET['delete'])) {
-    $the_post_id = $_GET['delete'];
-    $query  = "delete from posts where post_id = $the_post_id ;";
-    $delete_post_query = mysqli_query($connection, $query);
-    confirmQuery($delete_post_query);
-    header('Location: posts.php');
+
+if (isset($_GET['unapprove'])) {
+    $the_comment_id = $_GET['unapprove'];
+    $query  = "update comments set comment_status = 'unapproved' where comment_id = $the_comment_id ";
+    $unapprove_comment_query = mysqli_query($connection, $query);
+    confirmQuery($unapprove_comment_query);
+    header('Location: comments.php');
+}
+
+if (isset($_GET['approve'])) {
+    $the_comment_id = $_GET['approve'];
+    $query  = "update comments set comment_status = 'approved' where comment_id = $the_comment_id ";
+    $approve_comment_query = mysqli_query($connection, $query);
+    confirmQuery($approve_comment_query);
+    header('Location: comments.php');
+}
+
+
+if (isset($_GET['delete_comment'])) {
+    $the_comment_id = $_GET['delete_comment'];
+    $query  = "delete from comments where comment_id = $the_comment_id ;";
+    $delete_comment_query = mysqli_query($connection, $query);
+    confirmQuery($delete_comment_query);
+    header('Location: comments.php');
 }
 
 ?>

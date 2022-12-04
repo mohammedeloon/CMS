@@ -1,5 +1,5 @@
 <?php 
-
+// namespace admin\includes\functions;
 function confirmQuery($query){
     global $connection;
 if (!$query) {

@@ -54,14 +54,21 @@
         <?php
                 if (isset($_POST['create_comment'])) {
                     $the_post_id = $_GET['p_id'];
-                    $comment_author = $_POST['comment_author']; 
+                    $comment_author = $_POST['comment_auhtor']; 
                     $comment_email = $_POST['comment_email']; 
                     $comment_content = $_POST['comment_content']; 
 
-                }   
+                  
                 
-                $query = "insert into comments (comment_post_id, comment_author, comment_email, comment_content, comment_status ) ";
+                $query = "insert into comments (comment_post_id, comment_author, comment_email, comment_content, comment_status , comment_date  ) ";
                 $query .= " values ($the_post_id , '$comment_author'  , '$comment_email' , '$comment_content' , 'unapproved' , now() )";
+
+                $instert_comment_query = mysqli_query($connection, $query);
+                if (!$instert_comment_query) {
+                    die("Query failed " . mysqli_error($connection));
+                }
+
+            } 
                         ?>
                  <!-- Blog Comments -->
 
@@ -87,33 +94,43 @@
 
                 <hr>
 
-                <!-- Posted Comments -->
+                
 
-                <!-- Comment -->
+                
+
+
+
+                <?php 
+                
+                $query = "select * from comments where comment_post_id = $the_post_id";
+                $select_all_comments_query = mysqli_query($connection , $query);
+                if (!$query) {
+                    die("Query failed " . mysqli_error($connection));
+                }
+
+                while ($rows = mysqli_fetch_assoc($select_all_comments_query)) {
+                    $comment_id = $rows['comment_id'];
+                    $comment_post_id = $rows['comment_post_id'];
+                    $comment_author = $rows['comment_author'];
+                    $comment_email = $rows['comment_email'];
+                    $comment_content = $rows['comment_content'];
+                    $comment_status = $rows['comment_status'];
+                    $comment_date = $rows['comment_date'];
+                
+                ?>
+
+
                 <div class="media">
                     <a class="pull-left" href="#">
                         <img class="media-object" src="http://placehold.it/64x64" alt="">
                     </a>
                     <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
+                        <h4 class="media-heading"><?= $comment_author?>
+                            <small><?= $comment_date ?></small>
                         </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
-                    </div>
-                </div>
-
-                <!-- Comment -->
-                <div class="media">
-                    <a class="pull-left" href="#">
-                        <img class="media-object" src="http://placehold.it/64x64" alt="">
-                    </a>
-                    <div class="media-body">
-                        <h4 class="media-heading">Start Bootstrap
-                            <small>August 25, 2014 at 9:30 PM</small>
-                        </h4>
-                        Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
+                       <?= $comment_content ?>
                         <!-- Nested Comment -->
-                        <div class="media">
+                        <!-- <div class="media">
                             <a class="pull-left" href="#">
                                 <img class="media-object" src="http://placehold.it/64x64" alt="">
                             </a>
@@ -123,10 +140,12 @@
                                 </h4>
                                 Cras sit amet nibh libero, in gravida nulla. Nulla vel metus scelerisque ante sollicitudin commodo. Cras purus odio, vestibulum in vulputate at, tempus viverra turpis. Fusce condimentum nunc ac nisi vulputate fringilla. Donec lacinia congue felis in faucibus.
                             </div>
-                        </div>
+                        </div> -->
                         <!-- End Nested Comment -->
                     </div>
                 </div>
+
+                <?php } ?>
 
         </div>
 
