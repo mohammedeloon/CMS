@@ -32,6 +32,7 @@
             $comment_content = $rows['comment_content'];
             $comment_status = $rows['comment_status'];
             $comment_date = $rows['comment_date'];
+            
           
 
 
@@ -80,7 +81,7 @@
 
 
 
-            echo "<td>{ $comment_date}</td>";
+            echo "<td>$comment_date</td>";
             echo "<td><a href='comments.php?approve=$comment_id '><i class='fa fa-thumbs-up' aria-hidden='true'></i></a></td>";
             echo "<td><a href='comments.php?unapprove=$comment_id'><i class='fa fa-thumbs-down' aria-hidden='true'></i></a></td>";
             echo "<td><a href='comments.php?delete_comment=$comment_id'><i class='fa fa-trash'></i></a></td>";

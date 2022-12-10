@@ -1,5 +1,7 @@
 <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
-<div class="collapse navbar-collapse navbar-ex1-collapse">
+
+<!-- collapse navbar-collapse navbar-ex1-collapse -->
+<div   class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li>
             <a href="index.php"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
@@ -21,7 +23,7 @@
             <a href="./categories.php"><i class="fa fa-fw fa-wrench"></i> Catagories</a>
         </li>
        
-        <li class="active">
+        <li class="">
             <a href="./comments.php"><i class="fa fa-fw fa-file"></i> Comments</a>
         </li>
         <li>

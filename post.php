@@ -57,6 +57,7 @@
                     $comment_author = $_POST['comment_auhtor']; 
                     $comment_email = $_POST['comment_email']; 
                     $comment_content = $_POST['comment_content']; 
+                    $comment_date = date("Y-m-d h:i:sa");
 
                   
                 
@@ -65,6 +66,13 @@
 
                 $instert_comment_query = mysqli_query($connection, $query);
                 if (!$instert_comment_query) {
+                    die("Query failed " . mysqli_error($connection));
+                }
+
+                $query = "update posts set post_comment_count = post_comment_count + 1  ";
+                $query .= "where post_id = $the_post_id";
+                $update_comment_count = mysqli_query($connection, $query);
+                 if (!$instert_comment_query) {
                     die("Query failed " . mysqli_error($connection));
                 }
 
@@ -102,7 +110,7 @@
 
                 <?php 
                 
-                $query = "select * from comments where comment_post_id = $the_post_id";
+                $query = "select * from comments where comment_post_id = $the_post_id and comment_status = 'approved' order by 	comment_date desc";
                 $select_all_comments_query = mysqli_query($connection , $query);
                 if (!$query) {
                     die("Query failed " . mysqli_error($connection));

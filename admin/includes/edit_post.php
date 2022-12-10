@@ -15,7 +15,7 @@ while ($rows = mysqli_fetch_assoc($select_posts_by_id_query)) {
     $post_title = $rows['post_title'];
     $post_image = $rows['post_image'];
     $post_tags = $rows['post_tags'];
-    $post_status = $rows['post_status'];
+    // $post_status = $rows['post_status'];
     $post_content = $rows['post_content'];
     $post_date = $rows['post_date'];
     $post_category_id = $rows['post_category_id'];
@@ -109,10 +109,10 @@ if (isset($_POST['update_post'])) {
         </div>
 
 
-        <div class="form-group">
+        <!-- <div class="form-group">
             <label for="post_status">Post Status</label>
             <input type="text" class="form-control" name="post_status">
-        </div>
+        </div> -->
 
         <div class="form-group">
             <img width="200" src="../images/<?= $post_image ?>" alt="">

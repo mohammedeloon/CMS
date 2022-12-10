@@ -10,19 +10,21 @@
         <!-- Blog Entries Column -->
         <div class="col-md-8">
             <?php
-            $query = "select * from posts";
+            $query = "select * from posts where post_status = 'published' ";
             $select_all_post_query = mysqli_query($connection, $query);
 
 
-
+       
             while ($row = mysqli_fetch_assoc($select_all_post_query)) {
                 $post_id = $row['post_id'];
                 $post_title = $row['post_title'];
                 $post_author = $row['post_author'];
                 $post_date = $row['post_date'];
                 $post_image = $row['post_image'];
+                $post_status = $row['post_status'];
                 $post_content_explode = explode('.',$row['post_content'] );
                 $post_content = $post_content_explode[0] . '.'; // ADD A FULLSTOP TO THE FIRST SENTENCE.
+
 
             ?>
 
@@ -49,7 +51,7 @@
                 <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
-
+<!-- one bracket for the loop and another for the else statement -->
             <?php } ?>
 
         </div>
