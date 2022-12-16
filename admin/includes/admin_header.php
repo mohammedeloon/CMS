@@ -2,6 +2,31 @@
 <?php include("../includes/db.php") ?>
 <?php include("functions.php") ?>
 <?php session_start(); ?>
+
+<?php
+
+// if (isset($_SESSION['role'])) {
+//     if ($_SESSION['role'] !== 'admin') {
+
+//         header('location: ../index.php');
+//     }
+   
+// }
+ if (!isset($_SESSION['role'])) {
+
+    header('location: ../index.php');
+}
+
+else if(isset($_SESSION['role']) && $_SESSION['role'] !== 'admin'){
+
+    header('location: ../index.php');
+}
+
+
+?>
+
+
+
 <!DOCTYPE html>
 <html lang="en">
 
