@@ -21,9 +21,13 @@
                         
                         <small><?= $_SESSION['username'] ?></small>
                     </h1>
+
                 </div>
             </div>
+
+            
             <!-- /.row -->
+            
 
         </div>
         <!-- /.container-fluid -->
