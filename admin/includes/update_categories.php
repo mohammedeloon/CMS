@@ -13,6 +13,7 @@
                                        $cat_title =  $rows['cat_title'];
                                  ?>
 
+
                                     <input class="form-control" type="text" value="<?php if (isset($cat_title)) {
                                        echo $cat_title;
                                     } ?>" name="cat_title">

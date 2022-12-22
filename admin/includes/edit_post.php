@@ -15,7 +15,7 @@ while ($rows = mysqli_fetch_assoc($select_posts_by_id_query)) {
     $post_title = $rows['post_title'];
     $post_image = $rows['post_image'];
     $post_tags = $rows['post_tags'];
-    // $post_status = $rows['post_status'];
+    $post_status = $rows['post_status'];
     $post_content = $rows['post_content'];
     $post_date = $rows['post_date'];
     $post_category_id = $rows['post_category_id'];
@@ -59,6 +59,8 @@ if (isset($_POST['update_post'])) {
     $update_cat_query = mysqli_query($connection, $query);
     confirmQuery($update_cat_query);
     // header('Location:posts.php');
+
+    echo '<div class=" alert alert-success " style="width: 400px;" role="alert"> Post Edited successfully! <a  href="posts.php">View Posts</a> </div>';
 }
 
 
@@ -88,6 +90,9 @@ if (isset($_POST['update_post'])) {
                 $selet_cat_query = mysqli_query($connection, $query);
                 confirmQuery($selet_cat_query);
 
+             
+    
+
                 while ($rows = mysqli_fetch_assoc($selet_cat_query)) {
                     $cat_title =  $rows['cat_title'];
                     $cat_id =  $rows['cat_id'];
@@ -111,8 +116,25 @@ if (isset($_POST['update_post'])) {
 
         <!-- <div class="form-group">
             <label for="post_status">Post Status</label>
-            <input type="text" class="form-control" name="post_status">
+            <input type="text" value="<?= $post_status ?>" class="form-control" name="post_status">
         </div> -->
+        <div class="form-group">
+        <label for="title">Post Status</label>
+        <br>
+        <select name="post_status" id="" style="border-radius: 3px;" class="form-select form-select-sm">
+                <option value="<?= $post_status?>"><?= $post_status?></option>
+                <?php 
+                if($post_status == 'published'){
+                    echo "<option value='draft'>Draft</option>";
+
+                }else{
+                    echo "<option value='published'>Published</option>";
+                }
+                ?>
+
+        </select>
+        </div>
+        
 
         <div class="form-group">
             <img width="200" src="../images/<?= $post_image ?>" alt="">

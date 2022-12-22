@@ -48,7 +48,7 @@
                 </a>
                 <hr>
                 <p><?= $post_content ?></p>
-                <a class="btn btn-primary" href="#">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
+                <a class="btn btn-primary" href="post.php?p_id=<?= $post_id ?>">Read More <span class="glyphicon glyphicon-chevron-right"></span></a>
 
                 <hr>
 <!-- one bracket for the loop and another for the else statement -->

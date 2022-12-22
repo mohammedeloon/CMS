@@ -32,6 +32,8 @@ if (isset($_POST['create_user'])) {
 
     confirmQuery($add_user_query);
 
+    echo '<div class=" alert alert-success " style="width: 400px;" role="alert"> User Created successfully! <a  href="users.php">View Users</a> </div>';
+    
 
 }
 
