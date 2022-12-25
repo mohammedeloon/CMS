@@ -7,26 +7,13 @@ if (isset($_POST['create_user'])) {
     $username = $_POST['username'];
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
-    // $post_status = $_POST['post_status'];
+    $user_image = $_FILES['image']['name'];
+    $user_image_temp = $_FILES['image']['tmp_name'];
 
+    move_uploaded_file($user_image_temp , "../images/users_images/$user_image");
+    $query = "INSERT INTO users (user_firstname, user_lastname, user_role, username, user_email, user_password , user_image)  ";
 
-    // $post_image = $_FILES['image']['name'];
-    // $post_image_temp = $_FILES['image']['tmp_name'];
-
-   
-    
-    
-    // $post_tags = $_POST['post_tags'];
-    // $post_content = $_POST['post_content'];
-    // $post_date = date('d-m-y');
-  
-
-    // move_uploaded_file($post_image_temp, "../images/$post_image");
-
-
-    $query = "INSERT INTO users (user_firstname, user_lastname, user_role, username, user_email, user_password)  ";
-
-    $query .= " values ('$user_firstname' , '$user_lastname', '$user_role'  , '$username' , '$user_email', '$user_password'   )";
+    $query .= " values ('$user_firstname' , '$user_lastname', '$user_role'  , '$username' , '$user_email', '$user_password', '$user_image'   )";
    
     $add_user_query = mysqli_query($connection, $query);
 
@@ -69,10 +56,10 @@ if (isset($_POST['create_user'])) {
 
 
 
-<!-- <div class="form-group">
-<label for="post_image">Post Image</label>
+<div class="form-group">
+<label for="user_image">User Picture</label>
 <input type="file" class="form-control" name="image">
-</div> -->
+</div>
 
 <div class="form-group">
 <label for="post_tags">Username</label>

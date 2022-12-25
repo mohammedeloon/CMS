@@ -47,7 +47,7 @@
             echo "<td>{$user_email}</td>";
 
             echo "<td>$user_role</td>";
-            echo "<td>11$user_image</td>";
+            echo "<td><img class='img-responsive' width='80px' src='../images/users_images/$user_image' alt=''></td>";
 
             echo "<td><a href='users.php?change_to_admin=$user_id '><i class='fa fa-thumbs-up' aria-hidden='true'></i></a></td>";
             echo "<td><a href='users.php?change_to_sub=$user_id'><i class='fa fa-thumbs-down' aria-hidden='true'></i></a></td>";

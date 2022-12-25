@@ -46,9 +46,10 @@ if (isset($_POST['checkBoxArray'])) {
             <input type="submit" name="submit" class="btn btn-success" value="Apply">
             <a class="btn btn-primary" href="includes\add_post.php">Add New</a>
         </div>
-        <!-- <br>
         <br>
-        <br> -->
+        <br>
+        
+        
 
         <thead>
             <tr>

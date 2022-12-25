@@ -29,27 +29,17 @@ if (isset($_POST['edit_user'])) {
     $username = $_POST['username'];
     $user_email = $_POST['user_email'];
     $user_password = $_POST['user_password'];
-    // $post_status = $_POST['post_status'];
+    
 
+    $user_image = $_FILES['image']['name'];
+    $user_image_temp = $_FILES['image']['tmp_name'];
+    move_uploaded_file($user_image_temp, "../images/users_images/$user_image");
 
-    // $post_image = $_FILES['image']['name'];
-    // $post_image_temp = $_FILES['image']['tmp_name'];
-
-
-
-
-    // $post_tags = $_POST['post_tags'];
-    // $post_content = $_POST['post_content'];
-    // $post_date = date('d-m-y');
-
-
-    // move_uploaded_file($post_image_temp, "../images/$post_image");
-
-    $query = "update users set user_firstname = '$user_firstname', user_lastname = '$user_lastname', user_role =  '$user_role' , username = '$username', user_email = '$user_email', user_password = '$user_password' where user_id = $the_user_id  ";
+    $query = "update users set user_firstname = '$user_firstname', user_lastname = '$user_lastname', user_role =  '$user_role' , username = '$username', user_email = '$user_email', user_password = '$user_password', user_image = '$user_image' where user_id = $the_user_id  ";
 
     $edit_user_query = mysqli_query($connection, $query);
-
     confirmQuery($edit_user_query);
+    echo "<div class=' alert alert-success ' style='width: 400px;' role='alert'> User Edited successfully! <a href='users.php'>view all users</a></div>";  
 }
 
 ?>
@@ -94,12 +84,14 @@ if (isset($_POST['edit_user'])) {
 
 
 
+        <div class="form-group">
+            <img width="200" src="../images/users_images/<?= $user_image ?>" alt="">
+        </div>
 
-
-        <!-- <div class="form-group">
-<label for="post_image">Post Image</label>
-<input type="file" class="form-control" name="image">
-</div> -->
+        <div class="form-group">
+            <label for="post_image">User Picture</label>
+            <input type="file" class="form-control" value="<?= $user_image ?>" name="image">
+        </div>
 
         <div class="form-group">
             <label for="post_tags">Username</label>
