@@ -20,9 +20,7 @@ if (isset($_POST['checkBoxArray'])) {
                 break;
 
             default:
-                // $query = "select * from posts";
-                // $select_all_posts = mysqli_query($connection, $query);
-                // confirmQuery($select_all_posts);
+        
                 break;
         }
     }
@@ -33,7 +31,7 @@ if (isset($_POST['checkBoxArray'])) {
 <form action="" method="post">
     <table class="table table-bordered table-hover">
 
-        <div id="bulkOptionContainer" class="col-xs-4">
+        <div id="bulkOptionContainer" style="padding: 0px;" class="col-xs-4">
 
             <select class="form-control" name="bulk_options" id="">
                 <option value="">Select options</option>
