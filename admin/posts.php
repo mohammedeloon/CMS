@@ -13,11 +13,13 @@
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
+<br>
+<br>
 
-                    <h1 class="page-header">
+                    <!-- <h1 class="page-header">
                         Welcome to admin
                         <small>Author</small>
-                    </h1>
+                    </h1> -->
 
                 <?php 
                 

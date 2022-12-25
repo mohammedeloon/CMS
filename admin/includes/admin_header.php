@@ -5,14 +5,7 @@
 
 <?php
 
-// if (isset($_SESSION['role'])) {
-//     if ($_SESSION['role'] !== 'admin') {
-
-//         header('location: ../index.php');
-//     }
-   
-// }
- if (!isset($_SESSION['role'])) {
+if (!isset($_SESSION['role'])) {
 
     header('location: ../index.php');
 }
@@ -45,7 +38,8 @@ else if(isset($_SESSION['role']) && $_SESSION['role'] !== 'admin'){
 
     <!-- Custom CSS -->
     <link href="css/sb-admin.css" rel="stylesheet">
-    <!-- <link rel="stylesheet" href="css/summernote.css"> -->
+    <link rel="stylesheet" href="css/summernote.css">
+
     <!-- <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet"> -->
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
@@ -56,9 +50,12 @@ else if(isset($_SESSION['role']) && $_SESSION['role'] !== 'admin'){
         <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
+
+    
     <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
     <script type="text/javascript" src="js/summernote.min.js"></script>
     <script src="css/lang/summernote-ar-AR.min.js"></script>
+    
     
 <!-- <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script> -->
 

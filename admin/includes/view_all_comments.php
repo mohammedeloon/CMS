@@ -12,7 +12,7 @@
             <th>disapprove</th>
             <th>Delete</th>
             <th>Edit</th>
-        
+
         </tr>
     </thead>
     <tbody>
@@ -32,8 +32,8 @@
             $comment_content = $rows['comment_content'];
             $comment_status = $rows['comment_status'];
             $comment_date = $rows['comment_date'];
-            
-          
+
+
 
 
             echo "<tr>";
@@ -51,32 +51,31 @@
             //     $post_id =  $rows['post_id'];
             //     $post_title =  $rows['post_title'];
             //     echo "<td>{$post_title}</td>";
-               
+
             // }
 
 
 
-            
 
-          
+
+
             echo "<td>{$comment_email}</td>";
-          
+
             echo "<td>{$comment_status}</td>";
 
 
             $select_query = "select * from posts where post_id = $comment_post_id ";
-            $selct_post_query = mysqli_query($connection , $select_query);
+            $selct_post_query = mysqli_query($connection, $select_query);
             confirmQuery($selct_post_query);
 
             while ($rows = mysqli_fetch_assoc($selct_post_query)) {
                 $post_id = $rows['post_id'];
                 $post_title = $rows['post_title'];
                 echo "<td><a href='../post.php?p_id=$post_id'>$post_title</a> </td>";
-               
             }
-            
 
-            
+
+
 
 
 

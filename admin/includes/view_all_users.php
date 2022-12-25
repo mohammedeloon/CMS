@@ -12,7 +12,7 @@
             <th>Make Subscriber</th>
             <th>Delete</th>
             <th>Edit</th>
-        
+
         </tr>
     </thead>
     <tbody>
@@ -33,8 +33,8 @@
             $user_email = $rows['user_email'];
             $user_image = $rows['user_image'];
             $user_role = $rows['user_role'];
-            
-          
+
+
 
 
             echo "<tr>";
@@ -43,12 +43,12 @@
             echo "<td>{$user_firstname}</td>";
 
             echo "<td>{$user_lastname}</td>";
-          
+
             echo "<td>{$user_email}</td>";
 
             echo "<td>$user_role</td>";
             echo "<td>11$user_image</td>";
-           
+
             echo "<td><a href='users.php?change_to_admin=$user_id '><i class='fa fa-thumbs-up' aria-hidden='true'></i></a></td>";
             echo "<td><a href='users.php?change_to_sub=$user_id'><i class='fa fa-thumbs-down' aria-hidden='true'></i></a></td>";
             echo "<td><a href='users.php?delete_user=$user_id'><i class='fa fa-trash'></i></a></td>";

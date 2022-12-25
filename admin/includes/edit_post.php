@@ -60,7 +60,7 @@ if (isset($_POST['update_post'])) {
     confirmQuery($update_cat_query);
     // header('Location:posts.php');
 
-    echo '<div class=" alert alert-success " style="width: 400px;" role="alert"> Post Edited successfully! <a  href="posts.php">View Posts</a> </div>';
+    echo "<div class=' alert alert-success ' style='width: 400px;' role='alert'> Post Edited successfully! <a  href='../post.php?p_id=$the_post_id'>View Posts</a> or <a href='posts.php'>Edit more posts</a></div>";             
 }
 
 
