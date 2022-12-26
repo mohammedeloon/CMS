@@ -30,7 +30,7 @@
                    <?php } ?>
 
                    <li><a href="admin">Admin</a> </li>
-
+                   <li><a href="./registration/">Registration</a> </li>
 
 
                    <?php

@@ -17,9 +17,9 @@ if(isset($_POST['login'])){
 
         die("query failed" . mysqli_error($connection));
     }
-
+   
     while($row = mysqli_fetch_assoc($select_user_query)){
-
+        
          $user_id = $row['user_id'];
          $user_username = $row['username'];
          $user_password = $row['user_password'];
@@ -28,8 +28,9 @@ if(isset($_POST['login'])){
          $user_role = $row['user_role'];
         
     }
+    
 
-    if ($username === $user_username && $password === $user_password ){
+    if ($username === $user_username && $password === $user_password) {
         $_SESSION['username'] = $user_username;
         $_SESSION['firstname'] = $user_firstname;
         $_SESSION['lastname'] = $user_lastname;
@@ -39,6 +40,11 @@ if(isset($_POST['login'])){
     }else{
         header("Location: ../index.php");
     }
+   
+    // $username === $user_username && $password === $user_password
+    // password_verify($password , $user_password);
+    // exit;
+    
 }
 
 ?>

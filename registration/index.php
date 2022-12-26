@@ -1,3 +1,30 @@
+<?php include("../includes/db.php"); ?> 
+<?php 
+
+if(isset($_POST['submit'])){
+	$username = $_POST['username'];
+	$email=$_POST['email'];
+	$password =$_POST['pass'];
+
+	if(!empty($username) && !empty($email) && !empty($password)){
+		$username = mysqli_real_escape_string($connection ,$username);
+	$email = mysqli_real_escape_string($connection ,$email);
+	$password = mysqli_real_escape_string($connection ,$password);
+
+	// $password = password_hash($password , PASSWORD_BCRYPT , array('cost'=> 12));
+
+	$query = "insert into users (username , user_email , user_password  ,user_role) " ;
+	$query .= " values ('$username' , '$email' , '$password' , 'subscriber')";
+	$register_user_query = mysqli_query($connection , $query); 
+	if (!$register_user_query) {
+		die('query failed' . mysqli_error($connection). '' . mysqli_errno($connection));
+	}
+	
+	}
+};
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -22,7 +49,6 @@
 <!--===============================================================================================-->
 </head>
 <body>
-	
 	<div class="limiter">
 		<div class="container-login100">
 			<div class="wrap-login100">
@@ -30,13 +56,22 @@
 					<img src="images/img-01.png" alt="IMG">
 				</div>
 
-				<form class="login100-form validate-form">
+				<form class="login100-form validate-form" method="post">
 					<span class="login100-form-title">
 						Member Registration
 					</span>
+					<?php 
+					if(isset($_POST['submit'])){
+					if(!empty($username) && !empty($email) && !empty($password)){
+					echo "<div class=' alert alert-success ' style='width: 280px;' role='alert'> User created successfully!</div>";
+					}else{
+						echo "<div class=' alert alert-danger ' style='width: 280px;' role='alert'> Registration failed!</div>";
 
+					}}
+					
+					?>
 					<div class="wrap-input100 validate-input" data-validate = "Username is required">
-						<input class="input100" type="text" name="email" placeholder="User Name">
+						<input class="input100" type="text" name="username" placeholder="User Name">
 						<span class="focus-input100"></span>
 						<span class="symbol-input100">
 							<i class="fa fa-user" aria-hidden="true"></i>
@@ -60,7 +95,7 @@
 					</div>
 					
 					<div class="container-login100-form-btn">
-						<button class="login100-form-btn">
+						<button class="login100-form-btn" name="submit">
 							Register
 						</button>
 					</div>
@@ -75,11 +110,17 @@
 					</div>
 
 					<div class="text-center p-t-136">
-						<a class="txt2" href="#">
+						<a class="txt2" href="../index.php">
 							Already have an account?
 							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
 						</a>
+						<br>
+						<a class="txt2" href="../index.php">
+							Go to home page
+							<i class="fa fa-long-arrow-right m-l-5" aria-hidden="true"></i>
+						</a>
 					</div>
+					
 				</form>
 			</div>
 		</div>
