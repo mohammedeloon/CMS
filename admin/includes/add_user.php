@@ -1,14 +1,13 @@
 <?php 
-
 if (isset($_POST['create_user'])) {
-    $user_firstname = $_POST['user_firstname'];
-    $user_lastname = $_POST['user_lastname'];
-    $user_role = $_POST['user_role'];
-    $username = $_POST['username'];
-    $user_email = $_POST['user_email'];
-    $user_password = $_POST['user_password'];
-    $user_image = $_FILES['image']['name'];
-    $user_image_temp = $_FILES['image']['tmp_name'];
+    $user_firstname = escape($_POST['user_firstname']);
+    $user_lastname  = escape($_POST['user_lastname']);
+    $user_role      = escape($_POST['user_role']);
+    $username       = escape($_POST['username']);
+    $user_email     = escape($_POST['user_email']);
+    $user_password  = escape($_POST['user_password']);
+    $user_image     = escape($_FILES['image']['name']);
+    $user_image_temp = escape($_FILES['image']['tmp_name']);
 
     move_uploaded_file($user_image_temp , "../images/users_images/$user_image");
     $query = "INSERT INTO users (user_firstname, user_lastname, user_role, username, user_email, user_password , user_image)  ";
@@ -20,14 +19,8 @@ if (isset($_POST['create_user'])) {
     confirmQuery($add_user_query);
 
     echo '<div class=" alert alert-success " style="width: 400px;" role="alert"> User Created successfully! <a  href="users.php">View Users</a> </div>';
-    
-
 }
-
 ?>
-
-
-
 <div class="col-xs-6">
 <form action="" method="post" enctype="multipart/form-data">
 
@@ -35,8 +28,6 @@ if (isset($_POST['create_user'])) {
 <label for="title">First Name</label>
 <input type="text" class="form-control" name="user_firstname">
 </div>
-
-
 
 <div class="form-group">
 <label for="post_status">Last Name</label>
@@ -51,11 +42,6 @@ if (isset($_POST['create_user'])) {
 
     </select>
 </div>
-
-
-
-
-
 <div class="form-group">
 <label for="user_image">User Picture</label>
 <input type="file" class="form-control" name="image">
@@ -71,17 +57,10 @@ if (isset($_POST['create_user'])) {
 <input type="email" class="form-control" name="user_email">
 </div>
 
-
 <div class="form-group">
 <label for="post_tags">Password</label>
 <input type="password" class="form-control" name="user_password">
 </div>
-
-
-<!-- <div class="form-group">
-<label for="post_content">Email</label>
-<textarea class="form-control" name="email" id="" cols="30" rows="10"></textarea>
-</div> -->
 
 <div class="form-group">
 <input type="submit" class="btn btn-primary" name="create_user" value="Add user">

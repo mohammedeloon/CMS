@@ -10,6 +10,12 @@ if (!$query) {
 }
 
 
+function escape($string){
+    global $connection;
+    return mysqli_real_escape_string($connection , trim($string));
+}
+
+
 function insert_categories(){
     global $connection;
     if (isset($_POST["submit"])) {

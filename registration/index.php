@@ -1,30 +1,26 @@
 <?php include("../includes/db.php"); ?> 
+<?php include("../admin/functions.php"); ?> 
 <?php 
-
 if(isset($_POST['submit'])){
-	$username = $_POST['username'];
-	$email=$_POST['email'];
-	$password =$_POST['pass'];
+	$username = escape($_POST['username']);
+	$email    = escape($_POST['email']);
+	$password = escape($_POST['pass']);
 
 	if(!empty($username) && !empty($email) && !empty($password)){
 		$username = mysqli_real_escape_string($connection ,$username);
-	$email = mysqli_real_escape_string($connection ,$email);
-	$password = mysqli_real_escape_string($connection ,$password);
+		$email    = mysqli_real_escape_string($connection ,$email);
+		$password = mysqli_real_escape_string($connection ,$password);
 
 	// $password = password_hash($password , PASSWORD_BCRYPT , array('cost'=> 12));
-
-	$query = "insert into users (username , user_email , user_password  ,user_role) " ;
+	$query  = "insert into users (username , user_email , user_password  ,user_role) " ;
 	$query .= " values ('$username' , '$email' , '$password' , 'subscriber')";
 	$register_user_query = mysqli_query($connection , $query); 
 	if (!$register_user_query) {
 		die('query failed' . mysqli_error($connection). '' . mysqli_errno($connection));
 	}
-	
 	}
 };
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -55,7 +51,6 @@ if(isset($_POST['submit'])){
 				<div class="login100-pic js-tilt" data-tilt>
 					<img src="images/img-01.png" alt="IMG">
 				</div>
-
 				<form class="login100-form validate-form" method="post">
 					<span class="login100-form-title">
 						Member Registration
@@ -66,9 +61,7 @@ if(isset($_POST['submit'])){
 					echo "<div class=' alert alert-success ' style='width: 280px;' role='alert'> User created successfully!</div>";
 					}else{
 						echo "<div class=' alert alert-danger ' style='width: 280px;' role='alert'> Registration failed!</div>";
-
 					}}
-					
 					?>
 					<div class="wrap-input100 validate-input" data-validate = "Username is required">
 						<input class="input100" type="text" name="username" placeholder="User Name">

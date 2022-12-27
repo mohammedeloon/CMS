@@ -20,8 +20,8 @@
 
             $Select_post_count = "select * from posts";
             $find_count = mysqli_query($connection, $Select_post_count);
-            $count = mysqli_num_rows($find_count);
-            $count = ceil($count / $per_page);
+            $count     = mysqli_num_rows($find_count);
+            $count     = ceil($count / $per_page);
 
             $query = "select * from posts where post_status = 'published' limit $page_1 , $per_page";
             $select_all_post_query = mysqli_query($connection, $query);

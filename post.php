@@ -1,6 +1,5 @@
 <?php include('includes/header.php')  ?>
 <?php include('includes/navigation.php')  ?>
-
 <!-- Page Content -->
 <div class="container">
     <div class="row">
@@ -23,7 +22,6 @@
                     $post_image = $row['post_image'];
                     $post_content = $row['post_content'];
             ?>
-
                     <h1 class="page-header">
                         Page Heading
                         <small>Secondary Text</small>
@@ -47,11 +45,11 @@
             ?>
             <?php
             if (isset($_POST['create_comment'])) {
-                $the_post_id = $_GET['p_id'];
-                $comment_author = $_POST['comment_auhtor'];
-                $comment_email = $_POST['comment_email'];
-                $comment_content = $_POST['comment_content'];
-                $comment_date = date("Y-m-d h:i:sa");
+                $the_post_id     = escape($_GET['p_id']);
+                $comment_author  = escape($_POST['comment_auhtor']);
+                $comment_email   = escape($_POST['comment_email']);
+                $comment_content = escape($_POST['comment_content']);
+                $comment_date    = escape(date("Y-m-d h:i:sa"));
 
                 if (!empty($comment_author) && !empty($comment_email) && !empty($comment_content)) {
                     $query = "insert into comments (comment_post_id, comment_author, comment_email, comment_content, comment_status , comment_date  ) ";
@@ -101,13 +99,13 @@
                 die("Query failed " . mysqli_error($connection));
             }
             while ($rows = mysqli_fetch_assoc($select_all_comments_query)) {
-                $comment_id = $rows['comment_id'];
+                $comment_id      = $rows['comment_id'];
                 $comment_post_id = $rows['comment_post_id'];
-                $comment_author = $rows['comment_author'];
-                $comment_email = $rows['comment_email'];
+                $comment_author  = $rows['comment_author'];
+                $comment_email   = $rows['comment_email'];
                 $comment_content = $rows['comment_content'];
-                $comment_status = $rows['comment_status'];
-                $comment_date = $rows['comment_date'];
+                $comment_status  = $rows['comment_status'];
+                $comment_date    = $rows['comment_date'];
             ?>
                 <div class="media">
                     <a class="pull-left" href="#">
