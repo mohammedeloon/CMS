@@ -38,8 +38,8 @@ else if(isset($_SESSION['role']) && $_SESSION['role'] !== 'admin'){
 
     <!-- Custom CSS -->
     <link href="./css/sb-admin.css" rel="stylesheet">
-    <link rel="stylesheet" href="./css/styles.css">
     <link rel="stylesheet" href="css/summernote.css">
+    <link rel="stylesheet" href="./css/styles.css">
 
     <!-- Custom Fonts -->
     <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
