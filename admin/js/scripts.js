@@ -21,5 +21,3 @@ $(document).ready(function(){
     })
 });
 
-selectAllBoxes
-checkBoxes

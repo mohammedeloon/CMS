@@ -8,15 +8,38 @@ if (isset($_POST['checkBoxArray'])) {
                 $published_post_query = mysqli_query($connection, $query);
                 confirmQuery($published_post_query);
                 break;
+
             case 'draft':
                 $query = "update posts set post_status = '$bulk_options' where post_id = $post_id";
                 $draft_post_query = mysqli_query($connection, $query);
                 confirmQuery($draft_post_query);
                 break;
+
             case 'delete':
                 $query = "delete from posts where post_id = $post_id";
                 $delete_post_query = mysqli_query($connection, $query);
                 confirmQuery($delete_post_query);
+                break;
+
+            case 'clone':
+                $query = "select * from posts where post_id = $post_id";
+                $select_post_query = mysqli_query($connection, $query);
+                confirmQuery($select_post_query);
+                while ($rows = mysqli_fetch_assoc($select_post_query)) {
+                    $post_id = $rows['post_id'];
+                    $post_author  = $rows['post_author'];
+                    $post_title   = $rows['post_title'];
+                    $post_image   = $rows['post_image'];
+                    $post_tags    = $rows['post_tags'];
+                    $post_status  = $rows['post_status'];
+                    $post_content = $rows['post_content'];
+                    $post_date    = $rows['post_date'];
+                    $post_category_id = $rows['post_category_id'];
+                }
+                $query = "INSERT INTO posts (post_category_id, post_title, post_author, post_date, post_image, post_content, post_tags,  post_status)  ";
+                $query .= "values ($post_category_id , '$post_title', '$post_author' , now() , '$post_image' , '$post_content', '$post_tags' , '$post_status')";
+                $copy_post_query = mysqli_query($connection, $query);
+                confirmQuery($copy_post_query);
                 break;
 
             default:
@@ -38,6 +61,7 @@ if (isset($_POST['checkBoxArray'])) {
                 <option value="published">Publish Posts</option>
                 <option value="draft">Draft Posts</option>
                 <option value="delete">Delete</option>
+                <option value="clone">Clone</option>
             </select>
         </div>
         <!-- <br>
@@ -63,6 +87,7 @@ if (isset($_POST['checkBoxArray'])) {
                 <th>Draft</th>
                 <th>Image</th>
                 <th>Tags</th>
+                <th>Post views</th>
                 <th>Comments</th>
                 <th>Date</th>
                 <th>View Post</th>
@@ -90,6 +115,7 @@ if (isset($_POST['checkBoxArray'])) {
                 $post_date = $rows['post_date'];
                 $post_category_id = $rows['post_category_id'];
                 $post_comment_count = $rows['post_comment_count'];
+                $post_views_count = $rows['post_views_count'];
 
 
                 echo "<tr>";
@@ -130,6 +156,7 @@ if (isset($_POST['checkBoxArray'])) {
 
 
 
+                echo "<td>$post_views_count</td>";
                 echo "<td>$post_comment_count</td>";
 
 
@@ -138,12 +165,12 @@ if (isset($_POST['checkBoxArray'])) {
                 echo "<td>{$post_date}</td>";
                 echo "<td><a href='../post.php?p_id=$post_id'>view</a></td>";
                 echo "<td><a href='posts.php?edit=$post_id&source=edit_post'><i class='fa fa-edit'></i></a></td>";
-                echo "<td><a href='posts.php?delete=$post_id '><i class='fa fa-trash'></i></a></td>";
+                echo "<td><a onclick=\"javascript: return confirm('Are you sure you want to delete this post')\"  href='posts.php?delete=$post_id '><i class='fa fa-trash'></i></a></td>";
                 echo "<tr>";
             }
 
             ?>
-
+<a href="" onclick="javascript: return confirm('Are you sure you want to delete this post')"></a>
 
         </tbody>
     </table>
@@ -170,11 +197,15 @@ if (isset($_GET['draft'])) {
 
 
 if (isset($_GET['delete'])) {
-    $the_post_id = $_GET['delete'];
+    if(isset($_SESSION['role'])){
+        if($_SESSION['role'] == 'admin'){
+    $the_post_id = mysqli_real_escape_string($connection , $_GET['delete']) ;
     $query  = "delete from posts where post_id = $the_post_id ;";
     $delete_post_query = mysqli_query($connection, $query);
     confirmQuery($delete_post_query);
     header('Location: posts.php');
+    }
+}
 }
 
 ?>

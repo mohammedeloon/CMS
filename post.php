@@ -13,6 +13,10 @@
              if (isset($_GET['p_id'])) {
                 $the_post_id = $_GET['p_id'];
                
+            $view_query = "update posts set post_views_count = post_views_count +1 where post_id = $the_post_id";
+            $send_query = mysqli_query($connection , $view_query);
+            if(!$send_query){
+                die('query failed');
             }
           
             $query = "select * from posts where post_id = $the_post_id";
@@ -49,7 +53,12 @@
 
                 <hr>
 
-            <?php } ?>
+            <?php } }
+            
+            else{}
+            ?>
+
+
 
         <?php
                 if (isset($_POST['create_comment'])) {
@@ -83,7 +92,7 @@
                     }
 
                   
-                    
+                
 
             
                         ?>
