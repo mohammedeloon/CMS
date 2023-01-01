@@ -10,13 +10,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.php">CMS Admin</a>
+                <a class="navbar-brand" href="index.php"  style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif ;">CMS Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                 <!-- <li><a href="">Users Online </a></li> -->
                 <li><a href="">Users Online <span class="usersonline" ></span></a></li>
-                <li><a href=" ../index.php">Home Page</a></li>
+                <li><a href=" ../index.php" >Home Page</a></li>
 
             
               

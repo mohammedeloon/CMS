@@ -13,7 +13,7 @@
             <!-- Page Heading -->
             <div class="row">
                 <div class="col-lg-12">
-                    <h1 class="page-header">
+                    <h1 class="page-header" id="fonts" style="font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;">
                         Welcome to admin
                         <small>Author</small>
                     </h1>
